@@ -19,7 +19,7 @@ connect();
 App.post('/', async (req, res) => {
     req.body.id = new Date().valueOf();
     await propertyCollection.insertOne(req.body)
-    res.send('insurted')
+    res.send('insurted') 
 });
 
 
