@@ -2,18 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 const { MongoClient } = require('mongodb');
-
 const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 
 let collection;
-
 async function connect() {
-
   await client.connect();
   console.log('Connected successfully to mongodb');
   const db = client.db('rpms');
-  collection = db.collection('admin');
+  collection = db.collection('user');
 }
 connect();
 
@@ -21,36 +18,37 @@ connect();
 
 
 
-router.post('/', function (req, res) {
+router.post('/', async function (req, res) {
   req.body.id = new Date().valueOf();
-  collection.insert(req.body);
+  await collection.insert(req.body);
   res.send('added');
 });
 
 
-router.get('/', function (req, res) {
-  const geted = collection.find().toArray();
+router.get('/', async  (req, res) => {
+  const geted = await collection.find().toArray();
   res.send(geted);
 });
 
 
-router.get('/:id', function (req, res) {
+router.get('/:id', async (req, res) => {
   const id = +req.params.id;
-  const getid = collection.find({id});
+  const getid = await collection.findOne({id});
   res.send(getid);
 });
 
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   const id = +req.params.id;
-  collection.updateone({id}, {$SET: req.body});
+  await collection.updateOne({id}, {$set: req.body});
   res.send('updated');
 });
 
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const id = +req.params.id;
-  collection.deleteOne({id});
+  await collection.deleteOne({id});
+  res.send('deleted')
 });
 
 
