@@ -1,45 +1,32 @@
-var express = require('express');
-var App = express.Router();
-// const {propertyCollection} = require('../server')
+const express = require('express');
 
+const {getPropertyCollection} = require('../mongodb')
+const App = express.Router();
+const { validate } = require('express-validation')
+const propertyValidation = require('../validation/validationProperty')
 
-const { MongoClient } = require('mongodb');
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
-
-let propertyCollection;
-async function connect() {
-  await client.connect();
-  console.log('Connected successfully to mongodb');
-  const db = client.db('rpms');
-  propertyCollection = db.collection('property');
-}
-connect();
-
-App.post('/', async (req, res) => {
+App.post('/', validate(propertyValidation, {}, {}), async (req, res) => {
     req.body.id = new Date().valueOf();
-    await propertyCollection.insertOne(req.body)
+    await getPropertyCollection().insertOne(req.body)
     res.send('insurted') 
 });
 
 
 App.get('/', async(req, res) => {
-    const finddata = await propertyCollection.find().toArray();
+    const finddata = await getPropertyCollection().find().toArray();
     res.send(finddata);
 });
 
-
-
 App.get('/:id',async (req, res) => {
     const id = +req.params.id;
-    const findOne = await propertyCollection.findOne({id});
+    const findOne = await getPropertyCollection().findOne({id});
     res.send(findOne);
 });
 
 
 App.put('/:id',async (req, res) => { 
     const id = +req.params.id;
-    await propertyCollection.updateOne({id}, {$set:req.body})
+    await getPropertyCollection().updateOne({id}, {$set:req.body})
     res.send('updated');
 });
 

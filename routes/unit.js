@@ -1,21 +1,6 @@
 const express = require('express');
 var router = express.Router();
 
-const { MongoClient } = require('mongodb');
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
-
-let collection;
-async function connect() {
-  await client.connect();
-  console.log('Connected successfully to mongodb');
-  const db = client.db('rpms');
-  collection = db.collection('unit');
-}
-connect();
-
-
-
 router.post('/', (req, res) => {
     req.body.id = new Date().valueOf();
     collection.insertOne(req.body);
