@@ -17,7 +17,6 @@ connect();
 
 
 router.post('/', (req, res) => {
-    req.body.id = new Date().valueOf();
     collection.insertOne(req.body);
     res.send('added'); 
 });
