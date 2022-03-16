@@ -1,49 +1,37 @@
-var express = require('express');
-var router = express.Router();
-
-const { MongoClient } = require('mongodb');
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
-
-let collection;
-async function connect() {
-  await client.connect();
-  console.log('Connected successfully to mongodb');
-  const db = client.db('rpms');
-  collection = db.collection('user');
-}
-connect();
-
+const express = require('express');
+const router = express.Router();
+const{getUserCollection} = require('../mongodb')
 
 router.post('/', async function (req, res) {
-  await collection.insert(req.body);
+  req.body.id = new Date().valueOf();
+  await getUserCollection().insert(req.body);
   res.send('added');
 });
 
 
-router.get('/', async  (req, res) => {
-  const geted = await collection.find().toArray();
+router.get('/', async(req, res) => {
+  const geted = await getUserCollection().find().toArray();
   res.send(geted);
 });
 
 
 router.get('/:id', async (req, res) => {
   const id = +req.params.id;
-  const getid = await collection.findOne({id});
+  const getid = await getUserCollection().findOne({id});
   res.send(getid);
 });
 
 
 router.put('/:id', async (req, res) => {
   const id = +req.params.id;
-  await collection.updateOne({id}, {$set: req.body});
+  await getUserCollection().updateOne({id}, {$set: req.body});
   res.send('updated');
 });
 
 
 router.delete('/:id', async (req, res) => {
   const id = +req.params.id;
-  await collection.deleteOne({id});
+  await getUserCollection().deleteOne({id});
   res.send('deleted')
 });
 
