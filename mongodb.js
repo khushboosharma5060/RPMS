@@ -16,7 +16,11 @@ function getPropertyCollection() {
 
 function getUserCollection() {
   return db.collection('user');
-}
+};
+
+function getUnitCollection() {
+  return db.collection('unit');
+};
 
 
-module.exports = { connect, getUserCollection, getPropertyCollection }
+module.exports = { connect, getUserCollection, getPropertyCollection, getUnitCollection }
