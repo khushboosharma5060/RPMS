@@ -18,7 +18,7 @@ passport.use(new Strategy(opts, async function (payload, done) {
     }
 }));
 
-Api.post('/singin', async(req, res) => {
+Api.post('/login', async(req, res) => {
     const { username, password } = req.body;
     const result = await itemCollection.findOne({username});
     console.log(result)

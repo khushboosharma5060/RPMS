@@ -3,7 +3,7 @@ const express = require('express');
 const {getPropertyCollection} = require('../mongodb')
 const App = express.Router();
 const { validate } = require('express-validation')
-const propertyValidation = require('../validation/validationProperty')
+const propertyValidation = require('../validation/propertyValidation')
 
 App.post('/', validate(propertyValidation, {}, {}), async (req, res) => {
     req.body.id = new Date().valueOf();
