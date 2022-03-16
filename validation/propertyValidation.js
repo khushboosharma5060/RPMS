@@ -30,10 +30,6 @@ const propertyValidation = {
             .min(1)
             .max(20)
             .required(),
-         country: Joi.string()   
-         .min(1)
-         .max(70)
-         .required(),
     }),
 }
 module.exports = propertyValidation
