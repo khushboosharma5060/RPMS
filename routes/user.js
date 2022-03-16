@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const{getUserCollection} = require('../mongodb')
+const { validate } = require('express-validation')
+const tenentValidation = require('../validation/tenentValidation')
+
+
 
 router.post('/', async function (req, res) {
-  req.body.id = new Date().valueOf();
   await getUserCollection().insert(req.body);
   res.send('added');
 });
@@ -16,21 +19,21 @@ router.get('/', async(req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-  const id = +req.params.id;
+  const id = req.params.id;
   const getid = await getUserCollection().findOne({id});
   res.send(getid);
 });
 
 
 router.put('/:id', async (req, res) => {
-  const id = +req.params.id;
+  const id = req.params.id;
   await getUserCollection().updateOne({id}, {$set: req.body});
   res.send('updated');
 });
 
 
 router.delete('/:id', async (req, res) => {
-  const id = +req.params.id;
+  const id = req.params.id;
   await getUserCollection().deleteOne({id});
   res.send('deleted')
 });
