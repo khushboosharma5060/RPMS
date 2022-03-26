@@ -1,43 +1,89 @@
 const express = require('express');
+const fs = require('fs');
 var router = express.Router();
-const {getUnitCollection} = require('../mongodb')
+const { getUnitCollection } = require('../mongodb')
 const { validate } = require('express-validation')
-// const unitValidation = require('../validation/unitValidation')
+const unitValidation = require('../validation/unitValidation')
+var { ObjectId } = require('mongodb');
 
 
- 
-router.post('/', (req, res) => {
-<<<<<<< HEAD
-    collection.insertOne(req.body);
-=======
-  getUnitCollection().insertOne(req.body);
->>>>>>> 33a599d285ff660bb527acd7d637ddac343a2523
-    res.send('added'); 
+
+router.post('/', validate(unitValidation, {}, {}), async (req, res) => {
+  req.body.created = new Date();
+  await getUnitCollection().insertOne(req.body);
+  res.send('added');
 });
 
 
-router.get('/', async  (req, res) => {
-    const geted = await getUnitCollection().find().toArray();
-    res.send(geted);
-  });
-  
+router.get('/', async (req, res) => {
+  const geted = await getUnitCollection().find().toArray();
+  res.send(geted);
+});
+
+
 router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    const getid = await getUnitCollection().findOne({id});
-    res.send(getid);
-  });
-   
+  const getid = await getUnitCollection().findOne({ _id: new ObjectId(req.params.id) });
+  res.send(getid);
+});
+
 router.put('/:id', async (req, res) => {
-    const id = req.params.id;
-    await getUnitCollection().updateOne({id}, {$set: req.body});
-    res.send('updated');
-  });
-  
+  req.body.updat = new Date()
+  await getUnitCollection().updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body });
+  res.send('updated');
+});
+
+
 router.delete('/:id', async (req, res) => {
-    const id = req.params.id;
-    await getUnitCollection().deleteOne({id});
-    res.send('deleted')
+  await getUnitCollection().deleteOne({ _id: new ObjectId(req.params.id) });
+  res.send('deleted');
+});
+
+
+
+
+
+
+
+
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function (req, fild, cb) {
+    var dir = `unit_photos/${req.params.id}`
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    cb(null, dir)
+  },
+  filename: function (req, file, cb) {
+    let myfile = Date.now() + '.png';
+    cb(null, myfile);
+  }
+});
+
+const upload = multer({ storage });
+
+
+router.put('/:id/photo', upload.array('profile_images'), async (req, res) => {
+  res.send('unit_photo_uploded');
+});
+
+router.get('/:id/photo-list', async (req, res) => {
+  var dir = `unit_photos/${req.params.id}`
+  fs.readdir(dir, function (err, files) {
+    console.log(files)
+    res.send(files)
   });
-  
+});
+
+// 623acf731593745c7e3d3ac4/photo/: '1648225592207.png   urlpostman
+// unit_photos/623acf731593745c7e3d3ac4/1648225592207.png   pathForRead
+ router.get('/:id/photo/:photo_id', async (req, res) => {
+  const path = `unit_photos/${req.params.id}/${req.params.photo_id}`
+  const img = fs.readFileSync(path);
+  res.writeHead(200, {'Content-Type': 'image/gif' });
+  res.end(img, 'binary'); 
+ });
 
 module.exports = router;

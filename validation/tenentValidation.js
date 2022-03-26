@@ -4,7 +4,7 @@ const tenentValidation = {
     body: Joi.object({
         name: Joi.string()
             .min(3)
-            .max(20)
+            .max(40)
             .required(),
         email: Joi.string()
             .min(1)
@@ -12,11 +12,16 @@ const tenentValidation = {
             .required(),
         role: Joi.string()
             .min(1)
-            .max(50)
+            .max(100)
             .required(),
-       password: Joi.string()
-       .min(1)
-       .max(100)
+        password: Joi.string()
+            .min(1)
+            .max(100)
+            .required(),
+        created: Joi.string()
+            .min(1)
+            .max(200)
+            .required()
     }),
 }
 module.exports = tenentValidation
