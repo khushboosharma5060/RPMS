@@ -66,16 +66,21 @@ const upload = multer({ storage });
 
 
 router.put('/:id/photo', upload.array('profile_images'), async (req, res) => {
+  const photo = `unit_photos/${req.params.id}.png` 
+  await getUnitCollection().updateOne({_id:new ObjectId(req.params.id)}, {$set:{photo}});
   res.send('unit_photo_uploded');
 });
 
 router.get('/:id/photo-list', async (req, res) => {
   var dir = `unit_photos/${req.params.id}`
+  console.log(dir)
   fs.readdir(dir, function (err, files) {
     console.log(files)
     res.send(files)
   });
 });
+
+
 
 // 623acf731593745c7e3d3ac4/photo/: '1648225592207.png   urlpostman
 // unit_photos/623acf731593745c7e3d3ac4/1648225592207.png   pathForRead
@@ -86,4 +91,9 @@ router.get('/:id/photo-list', async (req, res) => {
   res.end(img, 'binary'); 
  });
 
+
+
+ 
 module.exports = router;
+
+

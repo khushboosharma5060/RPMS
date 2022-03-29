@@ -41,32 +41,48 @@ App.delete('/:id', async (req, res) => {
 
 
 
-
-
+ 
 const multer = require('multer');
 
 const storage = multer.diskStorage({
-    destination:async function(req, fild, cb) {
-        const folder = `property_photos/${req.params.id}/`;
-        if (!fs.existsSync(folder)) {
-            fs.mkdirSync(folder);
-        }
-        cb(null, folder)
-    },
-    filename: function (req, file, cb) {
-        let myfile = Date.now() + '.png';
-        cb(null, myfile);
-        console.log(myfile);
+  destination: function (req, fild, cb) {
+    var dir = `property_photos/${req.params.id}`
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
     }
+    cb(null, dir)
+  },
+  filename: function (req, file, cb) {
+    let myfile = Date.now() + '.png';
+    cb(null, myfile);
+  }
 });
 
-const uplode = {storage}
+const upload = multer({ storage });
 
-App.put('/:id/photo', uplode.array('property_images'), async(req, res) => {
-    const image = property_photos/'.png'
-    await getPropertyCollection().updateOne({ _id: new ObjectId(req.params.id) }, { $set:{image}  })
-    res.send('updated');
+
+App.put('/:id/photo', upload.array('property_images'), async(req, res) => {
+    const photo = `property_photos/${req.params.id}.png` 
+    await getPropertyCollection().updateOne({_id:new ObjectId(req.params.id)}, {$set:{photo}});
+  res.send('property_photos_uploded');
 });
+
+
+App.get('/:id/photo-list', async (req, res) => {
+  var dir = `property_photos/${req.params.id}`
+  fs.readdir(dir, function (err, files) {
+    res.send(files)
+  });
+});
+
+
+ App.get('/:id/photo/:photo_id', async (req, res) => {
+  const path = `property_photos/${req.params.id}/${req.params.photo_id}`
+  const img = fs.readFileSync(path);
+  res.writeHead(200, {'Content-Type': 'image/gif' });
+  res.end(img, 'binary'); 
+ });
+
 
 
 
