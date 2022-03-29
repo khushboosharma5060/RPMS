@@ -9,11 +9,15 @@ connect();
 const userdata = require('./routes/user');
 const unitdata = require('./routes/unit');
 const property = require('./routes/property');
+const user_queries = require('./routes/user_Queries');
 
-        // Api rout
+
+        // Api route
 app.use('/api/user', userdata);
-app.use('/api/unit', unitdata)
-app.use('/api/property', property)
+app.use('/api/unit', unitdata);
+app.use('/api/property', property);
+// app.use('/api/user_queries', user_queries);
+
 
 // Validation middleware
 app.use((err, req, res, next) => {

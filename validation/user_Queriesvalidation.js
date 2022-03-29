@@ -1,6 +1,6 @@
 const { Joi } = require('express-validation')
 
-const adminValidation = {
+const tenentValidation = {
     body: Joi.object({
         Name: Joi.string()
             .min(3)
@@ -14,10 +14,9 @@ const adminValidation = {
             .min(1)
             .max(50)
             .required(),
-       Password: Joi.string()
-       .min(1)
-       .max(100)
-       .required()
+        Password: Joi.string()
+            .min(1)
+            .max(100)
     }),
 }
-module.exports = adminValidation
+module.exports = tenentValidation

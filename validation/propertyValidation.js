@@ -14,7 +14,7 @@ const propertyValidation = {
             .min(1)
             .max(340)
             .required(),
-        Adress: Joi.string()
+        Address: Joi.string()
             .min(1)
             .max(200)
             .required(),
@@ -30,6 +30,22 @@ const propertyValidation = {
             .min(1)
             .max(20)
             .required(),
+        Lattitude: Joi.string()
+            .min(1)
+            .max(200)
+            .required(),
+        Longitude: Joi.string()
+            .min(1)
+            .max(200)
+            .required(),
+        created_by: Joi.string()
+            .min(1)
+            .max(200)
+            .required(),
+        updated_by: Joi.string()
+            .min(1)
+            .max(200)
+            .required()
     }),
 }
 module.exports = propertyValidation

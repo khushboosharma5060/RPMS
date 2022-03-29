@@ -2,21 +2,22 @@ const { Joi } = require('express-validation')
 
 const tenentValidation = {
     body: Joi.object({
-        name: Joi.string()
+        Name: Joi.string()
             .min(3)
             .max(20)
             .required(),
-        email: Joi.string()
+        Email: Joi.string()
             .min(1)
             .max(200)
             .required(),
-        role: Joi.string()
+        Role: Joi.string()
             .min(1)
             .max(50)
             .required(),
-       password: Joi.string()
-       .min(1)
-       .max(100)
+        Password: Joi.string()
+            .min(1)
+            .max(100)
+            .required()
     }),
 }
 module.exports = tenentValidation
