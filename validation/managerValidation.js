@@ -14,9 +14,14 @@ const managerValidation = {
             .min(1)
             .max(50)
             .required(),
-       password: Joi.string()
-       .min(1)
-       .max(100)
+        password: Joi.string()
+            .min(1)
+            .max(100)
+            .required(),
+        created: Joi.string()
+            .min(1)
+            .max(200)
+            .required()
     }),
 }
 module.exports = managerValidation

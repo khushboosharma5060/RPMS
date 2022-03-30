@@ -3,14 +3,13 @@ const express = require('express');
 const router = express.Router();
 const { getUserCollection } = require('../mongodb')
 const { validate } = require('express-validation')
-const userValidation = require('../validation/tenentValidation');
-var { ObjectId } = require('mongodb');
+const userValidation = require('../validation/tenentValidation')
+var {ObjectId} = require('mongodb');
 
 
-
-router.post('/', validate(userValidation, {}, {}), async function (req, res) {
-  req.body.created = new Date()
-  await getUserCollection().insertOne(req.body);
+router.post('/', validate(userValidation, {}, {}),async function (req, res) {
+  req.body.created = new Date();
+  await getUserCollection().insert(req.body);
   res.send('added');
 });
 
@@ -22,19 +21,22 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-  const getid = await getUserCollection().findOne({ _id: new ObjectId(req.params.id) });
+  const getid = await getUserCollection().findOne({_id:new ObjectId(req.params.id)});
+  console.log('param vala id:', req.params.id)
+  console.log('mogodb ka result',getid)
   res.send(getid);
 });
 
 
 router.put('/:id', async (req, res) => {
-  await getUserCollection().updateOne({ _id: new ObjectId(req.params.id)}, { $set: req.body });
+  req.body.created = new Date();
+  await getUserCollection().updateOne({_id:new ObjectId(req.params.id)}, {$set: req.body});
   res.send('updated');
 });
 
 
 router.delete('/:id', async (req, res) => {
-  await getUserCollection().deleteOne({ _id: new ObjectId(req.params.id)});
+  await getUserCollection().deleteOne({_id:new ObjectId(req.params.id)});
   res.send('deleted')
 });
   
@@ -56,7 +58,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 
-router.put('/:id/photo', upload.single("profile_photo"), async (req, res) => {
+router.put('/:id/photo', upload.single("profile_images"), async (req, res) => {
   const photo = `user_photos/${req.params.id}.png`
   await getUserCollection().updateOne({_id: new ObjectId(req.params.id)}, {$set: {photo}});
   res.send('updated');
@@ -75,4 +77,4 @@ router.get('/:id/photo', async (req, res) => {
 
 
 
-module.exports = router;
+module.exports = router; 

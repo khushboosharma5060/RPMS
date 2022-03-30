@@ -4,7 +4,7 @@ const tenentValidation = {
     body: Joi.object({
         Name: Joi.string()
             .min(3)
-            .max(20)
+            .max(40)
             .required(),
         Email: Joi.string()
             .min(1)
@@ -12,11 +12,15 @@ const tenentValidation = {
             .required(),
         Role: Joi.string()
             .min(1)
-            .max(50)
+            .max(100)
             .required(),
-        Password: Joi.string()
+        password: Joi.string()
             .min(1)
             .max(100)
+            .required(),
+        created: Joi.string()
+            .min(1)
+            .max(200)
             .required()
     }),
 }

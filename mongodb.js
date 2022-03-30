@@ -22,8 +22,9 @@ function getUnitCollection() {
   return db.collection('unit');
 };
 
-function getUser_queriesCollection(){
-  return db.collection('user_queries')
-}
+function getUserQueriesCollection() {
+  return db.collection('userQueries');
+};
 
-module.exports = { connect, getUserCollection, getPropertyCollection, getUnitCollection, getUser_queriesCollection }
+module.exports = {connect, getUserCollection, getPropertyCollection, getUnitCollection, 
+  getUserQueriesCollection};    
