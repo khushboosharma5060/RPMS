@@ -65,7 +65,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-router.put('/:id/photo', upload.array('profile_images'), async (req, res) => {
+router.put('/:id/photo', upload.array('unit_images'), async (req, res) => {
   const photo = `unit_photos/${req.params.id}.png` 
   await getUnitCollection().updateOne({_id:new ObjectId(req.params.id)}, {$set:{photo}});
   res.send('unit_photo_uploded');

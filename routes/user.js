@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const{getUserCollection} = require('../mongodb')
 const { validate } = require('express-validation')
-const userValidation = require('../validation/tenentValidation')
+const userValidation = require('../validation/userValidation')
 var {ObjectId} = require('mongodb');
 
 
@@ -59,7 +59,7 @@ const storage = multer.diskStorage({
  
 const upload = multer({storage});
  
-router.put('/:id/photo',upload.single('profile_image'), async (req, res) => {
+router.put('/:id/photo',upload.single('profile_images'), async (req, res) => {
  const photo = `user_photos/${req.params.id}.png` 
  await getUserCollection().updateOne({_id:new ObjectId(req.params.id)}, {$set:{photo}});
   res.send('updated');

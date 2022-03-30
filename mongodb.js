@@ -26,7 +26,11 @@ function getUserQueriesCollection() {
   return db.collection('userQueries');
 };
 
+function getPaymentCollection() {
+  return db.collection('payment');
+}
+
 module.exports = {
   connect, getUserCollection, getPropertyCollection,
-  getUnitCollection, getUserQueriesCollection, 
+  getUnitCollection, getUserQueriesCollection, getPaymentCollection
 };    
