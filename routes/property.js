@@ -1,22 +1,23 @@
+const fs = require('fs');
 const express = require('express');
 const { getPropertyCollection } = require('../mongodb')
 const App = express.Router();
 const { validate } = require('express-validation')
 const propertyValidation = require('../validation/propertyValidation')
 const { ObjectId } = require('mongodb');
-const fs = require('fs')
+
 
 App.post('/', validate(propertyValidation, {}, {}), async (req, res) => {
     req.body.created = new Date();
     await getPropertyCollection().insertOne(req.body)
     res.send('insurted');
 });
-
+ 
 
 App.get('/', async (req, res) => {
     const finddata = await getPropertyCollection().find().toArray();
     res.send(finddata);
-});
+}); 
 
 App.get('/:id', async (req, res) => {
     const findOne = await getPropertyCollection().findOne({ _id: new ObjectId(req.params.id) });
@@ -25,7 +26,7 @@ App.get('/:id', async (req, res) => {
 
 
 App.put('/:id', async (req, res) => {
-    req.body.updat = new Date()
+    req.body.update = new Date()
     await getPropertyCollection().updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body })
     res.send('updated');
 });

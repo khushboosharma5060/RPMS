@@ -7,14 +7,14 @@ const jwt = require('jsonwebtoken');
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'secret'
-}
+};
 
 passport.use(new Strategy(opts, async function (payload, done) {
-    const result = getUserCollection().findOne({ username: payload.username });
+    const result = await getUserCollection().findOne({ username: payload.username });
     if (!result) {
         return done(null, false)
     } else {
-        return done(null, true)
+        return done(null, result)
     }
 }));
 

@@ -15,7 +15,7 @@ router.post('/', validate(paymentValidation, {}, {}), async (req, res) => {
   
 
 
-  router.get('/', (req, res) => {
+  router.get('/', async(req, res) => {
     const geted = await getPaymentCollection().find().toArray();
     res.send(geted);
 })
@@ -40,3 +40,5 @@ router.get('/:id', async (req, res) => {
   });
     
 
+
+module.exports = router;

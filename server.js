@@ -9,7 +9,7 @@ connect();
 const userdata = require('./routes/user');
 const property = require('./routes/property') 
 const unitdata = require('./routes/unit')
-const userQuriesdata = require('./routes/userQueries')
+const userQuriesdata = require('./routes/userQueries') 
 const paymentdata = require('./routes/payment')
 
 

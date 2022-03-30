@@ -14,7 +14,7 @@ const propertyValidation = {
             .min(1)
             .max(340)
             .required(),
-        Adress: Joi.string()
+        Address: Joi.string()
             .min(1)
             .max(200)
             .required(),
