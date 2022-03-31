@@ -15,7 +15,7 @@ const userQuriesdata = require('./routes/userQueries')
 app.use('/api/user', userdata);
 app.use('/api/property', property); 
 app.use('/api/unit', unitdata);
-app.use('/api/userQueries',userQuriesdata);
+// app.use('/api/userQueries',userQuriesdata);
 
 // Validation middleware
 app.use((err, req, res, next) => {
