@@ -2,25 +2,37 @@ const { Joi } = require('express-validation')
 
 const managerValidation = {
     body: Joi.object({
-        name: Joi.string()
+        user_id: Joi.string()
             .min(3)
-            .max(20)
-            .required(),
-        email: Joi.string()
-            .min(1)
             .max(200)
             .required(),
-        role: Joi.string()
+        amount: Joi.number()
+            .min(1)
+            .max(500000)
+            .required(),
+            Transaction_Number1: Joi.string()
             .min(1)
             .max(50)
             .required(),
-        password: Joi.string()
+            Mode_of_payment: Joi.string()
             .min(1)
             .max(100)
             .required(),
-        created: Joi.string()
+        status: Joi.string()
             .min(1)
             .max(200)
+            .required(),
+            Remarks:Joi.string()
+            .min(1)
+            .max(200)
+            .required(),
+            Requested:Joi.string()
+            .min(1)
+            .max(200)
+            .required(),
+            Invoice:Joi.string()
+            .min(1)
+            .max(500)
             .required()
     }),
 }

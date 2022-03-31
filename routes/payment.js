@@ -4,11 +4,12 @@ const {getPaymentCollection} = require('../mongodb');
 const { validate } = require('express-validation');
 const paymentValidation = require('../validation/paymentValidation')
 var {ObjectId} = require('mongodb');
-
+const { generateBillPdf } = require('../pdf')
 
 
 router.post('/', validate(paymentValidation, {}, {}), async (req, res) => {
     req.body.created = new Date();
+    generateBillPdf(req.body)
     await getPaymentCollection().insertOne(req.body);
     res.send('added');
   });
@@ -42,3 +43,7 @@ router.get('/:id', async (req, res) => {
 
 
 module.exports = router;
+
+
+
+
