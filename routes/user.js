@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { getUserCollection } = require('../mongodb')
 const { validate } = require('express-validation')
-const userValidation = require('../validation/tenentValidation')
+const userValidation = require('../validation/userValidation')
 var {ObjectId} = require('mongodb');
 
 
@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
   const geted = await getUserCollection().find().toArray();
   res.send(geted);
 });
+
 
 
 router.get('/:id', async (req, res) => {

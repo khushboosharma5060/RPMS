@@ -9,13 +9,16 @@ connect();
 const userdata = require('./routes/user');
 const property = require('./routes/property') 
 const unitdata = require('./routes/unit')
-const userQuriesdata = require('./routes/userQueries')
+const userQuriesdata = require('./routes/userQueries') 
+const paymentdata = require('./routes/payment')
+
 
 // API routes
 app.use('/api/user', userdata);
 app.use('/api/property', property); 
 app.use('/api/unit', unitdata);
-// app.use('/api/userQueries',userQuriesdata);
+app.use('/api/userQueries',userQuriesdata);
+app.use('/api/payment', paymentdata);
 
 // Validation middleware
 app.use((err, req, res, next) => {
