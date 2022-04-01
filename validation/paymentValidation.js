@@ -10,11 +10,11 @@ const managerValidation = {
             .min(1)
             .max(500000)
             .required(),
-            Transaction_Number1: Joi.string()
+        Transaction_Number1: Joi.string()
             .min(1)
             .max(50)
             .required(),
-            Mode_of_payment: Joi.string()
+        Mode_of_payment: Joi.string()
             .min(1)
             .max(100)
             .required(),
@@ -22,7 +22,7 @@ const managerValidation = {
             .min(1)
             .max(200)
             .required(),
-            Remarks:Joi.string()
+        Requested: Joi.string()
             .min(1)
             .max(200)
             .required(),
@@ -37,9 +37,7 @@ const managerValidation = {
             unit_id : Joi.string()
             .min(1)
             .max(200)
-            .required(),
-
-       
+            .required(),     
     }),
 }
 module.exports = managerValidation
