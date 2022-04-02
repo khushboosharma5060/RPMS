@@ -4,7 +4,7 @@ const {getPaymentCollection} = require('../mongodb');
 const { validate } = require('express-validation');
 const paymentValidation = require('../validation/paymentValidation')
 var {ObjectId} = require('mongodb');
-const {GenerateBillPdf} = require('../pdf')
+const {GenerateBillPdf} = require('../pdfGenerateBill')
 
 router.post('/', validate(paymentValidation, {}, {}), async (req, res) => {
     req.body.created = new Date();
