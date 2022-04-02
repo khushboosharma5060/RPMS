@@ -33,7 +33,13 @@ const managerValidation = {
             Invoice:Joi.string()
             .min(1)
             .max(500)
-            .required()
+            .required(),
+            unit_id : Joi.string()
+            .min(1)
+            .max(200)
+            .required(),
+
+       
     }),
 }
 module.exports = managerValidation
