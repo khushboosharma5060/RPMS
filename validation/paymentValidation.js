@@ -22,22 +22,10 @@ const managerValidation = {
             .min(1)
             .max(200)
             .required(),
-        Requested: Joi.string()
+        unit_id: Joi.string()
             .min(1)
             .max(200)
             .required(),
-            Requested:Joi.string()
-            .min(1)
-            .max(200)
-            .required(),
-            Invoice:Joi.string()
-            .min(1)
-            .max(500)
-            .required(),
-            unit_id : Joi.string()
-            .min(1)
-            .max(200)
-            .required(),     
     }),
 }
 module.exports = managerValidation
