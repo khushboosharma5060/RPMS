@@ -18,10 +18,10 @@ const managerValidation = {
             .min(1)
             .max(100)
             .required(),
-        created: Joi.string()
-            .min(1)
-            .max(200)
-            .required()
+        phone:Joi.string()
+        .min(8)
+        .max(10)
+        .required()
     }),
 }
 module.exports = managerValidation

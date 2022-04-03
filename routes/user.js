@@ -9,7 +9,7 @@ var {ObjectId} = require('mongodb');
 
 router.post('/', validate(userValidation, {}, {}),async function (req, res) {
   req.body.created = new Date();
-  await getUserCollection().insert(req.body);
+  await getUserCollection().insertOne(req.body);
   res.send('added');
 });
 
