@@ -1,6 +1,6 @@
 const { Joi } = require('express-validation')
 
-const managerValidation = {
+const userValidation = {
     body: Joi.object({
         name: Joi.string()
             .min(3)
@@ -24,4 +24,4 @@ const managerValidation = {
         .required()
     }),
 }
-module.exports = managerValidation
+module.exports = userValidation

@@ -30,7 +30,11 @@ function getPaymentCollection() {
   return db.collection('payment');
 }
 
+function getLeaseCollection(){
+  return db.collection('lease');
+}
+
 module.exports = {
-  connect, getUserCollection, getPropertyCollection,
-  getUnitCollection, getUserQueriesCollection, getPaymentCollection
+  connect, getUserCollection, getPropertyCollection, getUnitCollection,
+  getUserQueriesCollection, getPaymentCollection, getLeaseCollection
 };    

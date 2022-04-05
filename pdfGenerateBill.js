@@ -16,10 +16,10 @@ async function generateBillPdf(payment) {
   const property = await getPropertyCollection().findOne({ _id: new ObjectId(unit.property)});
   // console.log(property)
 
-  doc.pipe(fs.createWriteStream('myBill.pdf'));
+  doc.pipe(fs.createWriteStream('my_bill.pdf'));
 
 doc
-
+ 
     // .addPage()
     .image('unit_photos/bill_image.jpg',385,74, {
       fit: [150, 100],
