@@ -50,10 +50,6 @@ const unitValidation = {
             .min(1)
             .max(300)
             .required(),
-        unit_detals: Joi.object()
-            .min(1)
-            .max(805443)
-            .required(),
         email: Joi.string()
             .min(1)
             .max(400)
