@@ -8,7 +8,7 @@ async function connect() {
   await client.connect();
   console.log('Connected successfully to mongodb');
   db = client.db('rpms');
-}
+} 
 
 function getPropertyCollection() {
   return db.collection('property');

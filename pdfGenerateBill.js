@@ -26,7 +26,7 @@ doc
       align: 'center',
       valign: 'center'
     })
-    .fontSize(30)
+    .fontSize(35)
     .fill('blue', 'even-odd')
     .text('RPMS', 30, 40)
 
@@ -34,7 +34,7 @@ doc
     .fill('black', 'even-odd')
     .text(`Address : ${property.Adress}`, 35, 115)
     .text(`Name : ${user.name}`, 35, 135)
-    .text(`phone : ${user.Phone}`, 35, 155) 
+    .text(`phone : ${user.Phone}`, 35, 155)
     .text(`Email : ${user.email}`, 35, 175)
     .text('____________________________________________________________', 35, 187)
 

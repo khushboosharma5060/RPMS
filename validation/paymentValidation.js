@@ -18,10 +18,6 @@ const managerValidation = {
             .min(1)
             .max(100)
             .required(),
-        status: Joi.string()
-            .min(1)
-            .max(200)
-            .required(),
         unit_id: Joi.string()
             .min(1)
             .max(200)

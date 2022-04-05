@@ -5,7 +5,7 @@ const { ValidationError } = require('express-validation')
 const app = express(); 
 app.use(express.json());
 connect();
- 
+   
 const userdata = require('./routes/user');
 const property = require('./routes/property') 
 const unitdata = require('./routes/unit')
